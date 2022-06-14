@@ -10,7 +10,7 @@ if($email && $password){
     $auth = new Auth($pdo, $base);
 
     if($auth->validateLogin($email, $password)){
-        header("Location".$base);
+        header("Location:".$base);
         exit;
     }
 
