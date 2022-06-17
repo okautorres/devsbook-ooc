@@ -11,8 +11,8 @@
                     </div>
                 </a>
                 <a href="<?=$base;?>/perfil.php">
-                    <div class="menu-item">
-                        <div class="menu-item-icon <?=($activeMenu=='perfil'?'active':'');?>">
+                    <div class="menu-item <?=($activeMenu=='perfil'?'active':'');?>">
+                        <div class="menu-item-icon">
                             <img src="<?=$base;?>/assets/images/user.png" width="16" height="16" />
                         </div>
                         <div class="menu-item-text">

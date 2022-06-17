@@ -1,6 +1,7 @@
 <?php
 require_once 'models/User.php';
 require_once 'dao/UserRelationDaoMysql.php';
+require_once 'dao/PostDaoMysql.php';
 
 class UserDaoMysql implements UserDAO{
 private $pdo;
@@ -24,6 +25,7 @@ private $pdo;
 
         if($full){
             $urDaoMysql = new UserRelationDaoMysql($this->pdo);
+            $postDaoMysql = new PostDaoMysql($this->pdo);
 
             //Seguidores
             $u->followers = $urDaoMysql->getFollowers($u->id);
@@ -39,7 +41,7 @@ private $pdo;
                 $u->following[$key] = $newUser;
             }
             //Fotos
-            $u->photos = [];
+            $u->photos = $postDaoMysql->getPhotosFrom($u->id);
         
         }
 
