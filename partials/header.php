@@ -1,6 +1,6 @@
 <?php
 $firstName = current(explode(' ', $userInfo->name));
-
+$searchTerm = filter_input(INPUT_GET, 's');
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,15 @@ $firstName = current(explode(' ', $userInfo->name));
                 <div class="head-side-left">
                     <div class="search-area">
                         <form method="GET" action="<?=$base;?>/search.php">
-                            <input type="search" placeholder="Pesquisar" name="s" />
+                            <input type="search" placeholder=" <?php if(!$searchTerm){
+                             echo 'Pesquisar';
+                            }
+                            else {
+                                echo $searchTerm;
+                            } 
+                            ?>
+                            
+                            " name="s" />
                         </form>
                     </div>
                 </div>
