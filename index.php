@@ -28,20 +28,19 @@ require 'partials/menu.php';
     <div class="column side pl-5">
      <div class="box banners">
         <div class="box-header">
-            <div class="box-header-text">Patrocinios</div>
+            <div class="box-header-text">Estudos</div>
             <div class="box-header-buttons">
                 
             </div>
             </div>
         <div class="box-body">
-            <a href=""><img src="https://alunos.b7web.com.br/media/courses/php-nivel-1.jpg" /></a>
-            <a href=""><img src="https://alunos.b7web.com.br/media/courses/laravel-nivel-1.jpg" /></a>
+            <img src="<?=$base;?>/assets/images/mysql.png" />
+            <img src="<?=$base;?>/assets/images/php.png" />
         </div>
     </div>
     <div class="box">
         <div class="box-body m-10">
-            Front-end B7Web <br>
-            Back-end Kauan Torres
+            Dev.Back end - Kauan Torres
         </div>
     </div>
 </div>
