@@ -28,9 +28,9 @@
                         <div class="menu-item-text">
                             Amigos
                         </div>
-                        <div class="menu-item-badge">
-                            
-                        </div>
+                        <!--<div class="menu-item-badge">
+
+                        </div> -->
                     </div>
                 </a>
                 <a href="<?=$base;?>/fotos.php">

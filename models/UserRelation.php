@@ -10,4 +10,5 @@ interface UserRelationDAO{
     public function getFollowing($id);
     public function getFollowers($id);
     public function isFollowing($id1, $id2);
+    public function getFriends($id, $ids);
 }

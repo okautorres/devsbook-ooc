@@ -41,6 +41,6 @@ class UploadHelper {
            );
      
            return $finalImage;
-         }
+         } 
     }
 }

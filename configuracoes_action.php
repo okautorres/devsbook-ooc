@@ -76,7 +76,7 @@ if($name && $email){
         imagejpeg($finalImage, './media/avatars/'.$avatarName, 100);
         $userInfo->avatar = $avatarName;
      
-    }
+    } 
 
     //Cover
     if(isset($_FILES['cover']) && !empty($_FILES['cover']['tmp_name'])) {
@@ -88,7 +88,6 @@ if($name && $email){
         $userInfo->cover = $coverName;
      
     }
-
 
 
     $userDao->update($userInfo);
