@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Jul-2022 às 17:45
+-- Tempo de geração: 15-Jul-2022 às 17:49
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -93,7 +93,8 @@ INSERT INTO `posts` (`id`, `id_user`, `type`, `created_at`, `body`) VALUES
 (8, 13, 'text', '2022-06-15 03:05:06', 'Pessoal, tudo bem! Busco parceiros para empreender comigo em meu software.\r\n\r\nAcabei de aprová-lo na Appstore. É um sistema de atendimento via WhatsApp multi-atendentes para auxiliar empresas.\r\n\r\nEste sistema permite que vários funcionários/colaboradores da empresa atendam um mesmo número de WhatsApp, mesmo que estejam trabalhando remotamente, sendo que cada um acessa com um login e senha particular....'),
 (9, 17, 'text', '2022-06-15 21:16:33', 'Aqui é o Gabriel'),
 (10, 13, 'text', '2022-06-17 22:07:52', 'teste'),
-(11, 14, 'text', '2022-06-23 22:37:23', 'Bitcoin subiu galera');
+(11, 14, 'text', '2022-06-23 22:37:23', 'Bitcoin subiu galera'),
+(26, 13, 'photo', '2022-07-15 17:49:03', 'c12a04ccd6859f42a5d9c6002deebf86');
 
 -- --------------------------------------------------------
 
@@ -139,7 +140,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `birthdate`, `city`, `work`, `avatar`, `cover`, `token`) VALUES
-(13, 'darqueboost@gmail.com', '$2y$10$FG9E3UkD9NlNdXKrIFvC4eHpRYocNFL81/KxGKQzcuLDkLAbdLi4S', 'Daniel Alves', '2004-10-20', 'São Paulo', 'SESI', 'cb280b1253c527a06aa2f0fe6f943e5d', '93e661f97d256832c0e2dd7add37d558', '9c234b87c3628fabcf789360704bd8e1'),
+(13, 'darqueboost@gmail.com', '$2y$10$FG9E3UkD9NlNdXKrIFvC4eHpRYocNFL81/KxGKQzcuLDkLAbdLi4S', 'Daniel Alves', '2004-10-20', 'São Paulo', 'SESI', 'cb280b1253c527a06aa2f0fe6f943e5d', '93e661f97d256832c0e2dd7add37d558', 'cab7f9ef53e20b118becc6623317a86d'),
 (14, 'iran@gmail.com', '$2y$10$HRk.ce9QYXTQ1RNw8vX5iugiUxFdGxmV1oVwcAB7v0./SJCqFAtCm', 'George Robson', '1990-02-15', '', '', '8291815bd3ed44b8409cddf2fdfe4875', '797d3cd15a74fc912f69616d525e8370', '31a6bbf4bb421c00c5cf7b15240ce87d'),
 (17, 'gabriel@gmail.com', '$2y$10$ZAHlT2sidqr5Jfv/DIndZuhZHHls0kYGLLV6F4uWe2WJ2h5C8zcS6', 'Gabriel', '2000-04-08', 'São Sebastião', '', 'default.jpg', 'cover.jpg', '5529ac30e80b4aa7710a53b9621da708');
 
@@ -197,7 +198,7 @@ ALTER TABLE `postlikes`
 -- AUTO_INCREMENT de tabela `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `userrelations`
