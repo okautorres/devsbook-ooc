@@ -364,11 +364,15 @@ header .head-side {
 
 .user-photo-item {
     margin-right:10px;
+    max-width: 25%;
 }
 .user-photo-item:last-child {
     margin-right:0;
 }
 .user-photo-item img {
+    max-width: 100%;
+}
+.full-user-photos .user-photo-item{
     max-width: 100%;
 }
 

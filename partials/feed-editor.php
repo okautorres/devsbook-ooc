@@ -29,7 +29,7 @@ $firstName = current(explode(' ', $userInfo->name));
     let feedSubmit = document.querySelector('.feed-new-send');
     let feedForm = document.querySelector('.feed-new-form');
     let feedPhoto = document.querySelector('.feed-new-photo'); 
-let feedFile = document.querySelector('.feed-new-file');
+    let feedFile = document.querySelector('.feed-new-file');
 
 feedPhoto.addEventListener('click', function(){
     feedFile.click();
