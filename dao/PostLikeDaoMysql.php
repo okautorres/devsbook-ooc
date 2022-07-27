@@ -53,4 +53,10 @@ class PostLikeDaoMysql implements PostLikeDAO {
         $sql->bindValue(':id_user', $id_user);
         $sql->execute();
     }
+
+    public function deleteFromPost($id_post){
+        $sql = $this->pdo->prepare("DELETE FROM postlikes WHERE id_post = :id_post");
+        $sql->bindValue(':id_post', $id_post);
+        $sql->execute();
+    }
 }

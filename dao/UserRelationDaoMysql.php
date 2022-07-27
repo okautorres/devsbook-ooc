@@ -81,9 +81,10 @@ class UserRelationDaoMysql implements UserRelationDAO{
 
     }
 
-    public function getFriends($id, $ids){
-        $sql = $this->pdo->prepare("SELECT * FROM userrelations WHERE
-        user_from = :user_to AND user_to = :user_from");
+    /**public function getFriends($id, $ids){
+        $users = [];
+        $sql = $this->pdo->prepare("SELECT user_from AND user_to FROM userrelations WHERE
+        user_from = :user_from AND user_to = :user_to");
         $sql->bindValue('user_from', $id);
         $sql->bindValue('user_to', $ids);
         $sql->execute();
@@ -98,8 +99,7 @@ class UserRelationDaoMysql implements UserRelationDAO{
         return $users;
 
 
-    }
-
+    } **/
     
 
 }

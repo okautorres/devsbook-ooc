@@ -26,14 +26,62 @@ class PostDaoMysql implements PostDao{
         $sql->execute();
     }
 
-    public function getUserFeed($id_user){
-        $array = [];
+    public function delete($id, $id_user){
+        $postLikeDao = new PostLikeDaoMysql($this->pdo);
+        $postCommentDao = new PostCommentDaoMysql($this->pdo);
+
+
+        // 1.
+        $sql = $this->pdo->prepare("SELECT * FROM posts 
+        WHERE id = :id 
+        AND id_user = :id_user");
+        $sql->bindValue(':id', $id);
+        $sql->bindValue(':id_user', $id_user);
+        $sql->execute();
+
+        if($sql->rowCount() > 0){
+            $post = $sql->fetch(PDO::FETCH_ASSOC);
+
+               // 2.
+               $postLikeDao->deleteFromPost($id);
+               $postCommentDao->deleteFromPost($id);
+
+               //3.
+               if($post['type'] === 'photo'){
+                $img = 'media/uploads/'.$post['body'];
+                if(file_exists($img)){
+                    unlink($img);
+                }
+               }
+
+               // 4.
+               
+                $sql = $this->pdo->prepare("DELETE FROM posts 
+                WHERE id = :id 
+                AND id_user = :id_user");
+                $sql->bindValue(':id', $id);
+                $sql->bindValue(':id_user', $id_user);
+                $sql->execute();
+        }
+
+     
+        /* 1. Verificar se o post existe (type)
+           2. Deletar likes e comentários
+           3. Deletar foto do sistema (type == photo)
+           4. Deletar post */
+
+    }
+
+    public function getUserFeed($id_user, $page = 1){
+        $array = ['feed'=>[]];
+        $perPage = 3;
+
+        $offset = ($page - 1) * $perPage;
 
         // 1. Pegar os posts ordenado por data
         $sql = $this->pdo->prepare("SELECT * FROM posts
          WHERE id_user = :id_user
-         ORDER BY created_at DESC
-         ");
+         ORDER BY created_at DESC LIMIT $offset,$perPage");
         $sql->bindValue(':id_user', $id_user);
         $sql->execute();
 
@@ -41,14 +89,35 @@ class PostDaoMysql implements PostDao{
          if($sql->rowCount() > 0){
             $data = $sql->fetchAll(PDO::FETCH_ASSOC);
             // 2. Transformar o resultado em objetos
-            $array = $this->_postListToObject($data, $id_user);
+            $array['feed'] = $this->_postListToObject($data, $id_user);
          }
+
+         $sql = $this->pdo->prepare("SELECT COUNT(*) as c FROM posts
+         WHERE id_user = :id_user");
+        $sql->bindValue(':id_user', $id_user);
+        $sql->execute();
+
+         
+
+         $totalData = $sql->fetch();
+         $total = $totalData['c'];
+
+         $array['pages'] = ceil($total / $perPage);
+
+         $array['currentPage'] = $page;
 
          return $array;
     }
 
-    public function getHomeFeed($id_user){
+    public function getHomeFeed($id_user, $page = 1){
         $array = [];
+        $perPage = 5;
+
+    
+        $offset = ($page - 1) * $perPage; // offset = vai pular, ou seja, na página 1-1 = 0*5= 0 -> vai começar a exibir do post 0. se for página 2-1=1 5*1 = vai começar a exibir do 5.
+        
+
+
         // FAZER FEED
         // 1. Lista dos seguidores que eu sigo
         $urDao = new UserRelationDaoMysql($this->pdo);
@@ -59,13 +128,23 @@ class PostDaoMysql implements PostDao{
         // 2. Pegar os posts ordenado por data
         $sql = $this->pdo->query("SELECT * FROM posts
          WHERE id_user IN (".implode(',', $userList).")
-         ORDER BY created_at DESC
+         ORDER BY created_at DESC LIMIT $offset,$perPage
          ");
          if($sql->rowCount() > 0){
             $data = $sql->fetchAll(PDO::FETCH_ASSOC);
             // 3. Transformar o resultado em objetos
-            $array = $this->_postListToObject($data, $id_user);
+            $array['feed'] = $this->_postListToObject($data, $id_user);
          }
+
+         // 4. Pegar o TOTAL de posts
+         $sql = $this->pdo->query("SELECT COUNT(*) as c FROM posts
+         WHERE id_user IN (".implode(',', $userList).")");
+         $totalData = $sql->fetch();
+         $total = $totalData['c'];
+
+         $array['pages'] = ceil($total / $perPage);
+
+         $array['currentPage'] = $page;
 
          return $array;
     }
